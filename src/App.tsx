@@ -24,32 +24,35 @@ import './theme/variables.scss';
 import { Toolbar } from './components/toolbar';
 import { HomeTab } from './components/tabs/home';
 import { About } from './components/tabs/about';
-import { home, informationCircle, homeOutline } from 'ionicons/icons';
+import { informationCircle, homeOutline } from 'ionicons/icons';
+
+import './app.scss'
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonPage id='main'>
-        <Toolbar />
+      <IonRouterOutlet id='main'>
         <IonTabs>
           <IonRouterOutlet>
-            <Route path='/homeTab' component={HomeTab} exact />
-            <Route path='/about' component={About} exact />
-            <Redirect from='/' to='/homeTab' />
+            <IonPage>
+              <Toolbar />
+              <Route path='/' component={HomeTab} exact />
+              <Route path='/about' component={About} exact />
+              <Redirect from='*' to='/' />
+            </IonPage>
           </IonRouterOutlet>
-
-          <IonTabBar slot='bottom'>
+          <IonTabBar slot='bottom' className='tabBar'>
             <IonTabButton tab='home' href='/homeTab'>
               <IonIcon icon={homeOutline}></IonIcon>
-              {/* <IonLabel>Home</IonLabel> */}
+              <IonLabel>Home</IonLabel>
             </IonTabButton>
             <IonTabButton tab='about' href='/about'>
               <IonIcon icon={informationCircle} />
-              {/* <IonLabel>About</IonLabel> */}
+              <IonLabel>About</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
-      </IonPage>
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );
