@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonPage, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonPage } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -21,39 +21,25 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.scss';
-import { Toolbar } from './components/toolbar';
-import { HomeTab } from './components/tabs/home';
-import { About } from './components/tabs/about';
-import { informationCircle, homeOutline } from 'ionicons/icons';
 
-import './app.scss'
+import { HomeTab } from './components/pages/home';
+import { About } from './components/pages/about';
+
+import './app.scss';
+import { TabBar } from './components/tabBar';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet id='main'>
-        <IonTabs>
-          <IonRouterOutlet>
-            <IonPage>
-              <Toolbar />
-              <Route path='/' component={HomeTab} exact />
-              <Route path='/about' component={About} exact />
-              <Redirect from='*' to='/' />
-            </IonPage>
-          </IonRouterOutlet>
-          <IonTabBar slot='bottom' className='tabBar'>
-            <IonTabButton tab='home' href='/homeTab'>
-              <IonIcon icon={homeOutline}></IonIcon>
-              <IonLabel>Home</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab='about' href='/about'>
-              <IonIcon icon={informationCircle} />
-              <IonLabel>About</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <IonPage>
+          <Route path='/' component={HomeTab} exact />
+          <Route path='/about' component={About} exact />
+          <Redirect from='*' to='/' />
+        </IonPage>
       </IonRouterOutlet>
     </IonReactRouter>
+    <TabBar />
   </IonApp>
 );
 

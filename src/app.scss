@@ -1,3 +1,12 @@
-.tabBar {
-    background-color: violet;
+@import './assets/css/base.scss';
+
+.tab {
+    &__bar {
+        background-color: $bottomBarPurple;
+    }
+    &__button {
+        background-color: transparent;
+        border: 2px dashed red;
+        height: 48px;
+    }
 }
